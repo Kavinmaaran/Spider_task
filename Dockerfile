@@ -5,5 +5,6 @@ RUN apt update
 RUN apt -y upgrade
 RUN apt install -y php libapache2-mod-php php-mysql
 COPY ./data/ .
-EXPOSE 80
-CMD ["/bin/bash"]
+EXPOSE 3000
+EXPOSE $PORT
+CMD [ "php", "-S", "0.0.0.0:3000" ]
