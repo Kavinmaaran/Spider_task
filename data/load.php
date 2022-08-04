@@ -1,3 +1,0 @@
-<?php
-
-$file="/var/server";

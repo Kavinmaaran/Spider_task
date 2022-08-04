@@ -1,5 +1,4 @@
 <?php
-include '../load.php';
 function form($name, $dept, $email, $rollno)
 {
     $servername = "db";
