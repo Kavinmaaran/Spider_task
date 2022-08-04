@@ -1,10 +1,8 @@
-FROM ubuntu:latest
-ARG DEBIAN_FRONTEND=noninteractive
-WORKDIR /var/server
-RUN apt update
-RUN apt -y upgrade
-RUN apt install -y php libapache2-mod-php php-mysql
+FROM python:3.8
+WORKDIR /
 COPY ./data/ .
-EXPOSE 3000
-EXPOSE $PORT
-CMD [ "php", "-S", "0.0.0.0:${PORT}" ]
+RUN apt-get -y update
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip3 install -r requirements.txt
+EXPOSE 5000
+CMD gunicorn main:app
