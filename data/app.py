@@ -25,10 +25,10 @@ def home():
                             VALUES (%s, %s, %s, %s);''',(name,dept,email,rollno))
             mysql.connection.commit()
             cursor.close()
-            return render_template("https://spider987.herokuapp.com/success")
+            return render_template('success.html')
         except:
             cursor.close()
-            return render_template("https://spider987.herokuapp.com/unsuccess")
+            return render_template('unsuccess.html')
 
 @app.route('/success', methods = ['POST', 'GET'])
 def search():
