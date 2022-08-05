@@ -1,8 +1,7 @@
-FROM python:3
-RUN pip3 install --upgrade pip
-WORKDIR /app
+FROM mysql:latest
+ARG DEBIAN_FRONTEND=noninteractive
+WORKDIR /var/database
+RUN apt update
+RUN apt -y upgrade
 COPY ./data/ .
-RUN pip3 install -r requirements.txt
-RUN pip3 install flask-mysqldb
-ENTRYPOINT [ "python" ]
-CMD ["app.py" ]
+CMD ["/usr/bin/mysqld_safe"]
