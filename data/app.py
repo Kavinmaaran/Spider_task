@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request,redirect
+from flask import Flask,render_template, request
 import os
 from flask_mysqldb import MySQL
 
@@ -25,10 +25,10 @@ def home():
                             VALUES (%s, %s, %s, %s);''',(name,dept,email,rollno))
             mysql.connection.commit()
             cursor.close()
-            return redirect("https://spider987.herokuapp.com/success")
+            return render_template("https://spider987.herokuapp.com/success")
         except:
             cursor.close()
-            return redirect("https://spider987.herokuapp.com/unsuccess")
+            return render_template("https://spider987.herokuapp.com/unsuccess")
 
 @app.route('/success', methods = ['POST', 'GET'])
 def search():
