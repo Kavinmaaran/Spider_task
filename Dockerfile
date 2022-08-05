@@ -1,5 +1,8 @@
-FROM mysql:latest
-ARG DEBIAN_FRONTEND=noninteractive
-WORKDIR /var/database
+FROM python:3
+RUN pip3 install --upgrade pip
+WORKDIR /app
 COPY ./data/ .
-CMD ["/usr/bin/mysqld_safe"]
+RUN pip3 install -r requirements.txt
+RUN pip3 install flask-mysqldb
+ENTRYPOINT [ "python" ]
+CMD ["app.py" ]

@@ -6,12 +6,9 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
+/*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `sql6510938`;
 
-DROP DATABASE IF EXISTS `form`;
-CREATE DATABASE `form` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `form`;
-
-DROP TABLE IF EXISTS `form_details`;
 CREATE TABLE `form_details` (
   `name` varchar(30) NOT NULL,
   `dept` varchar(20) NOT NULL,
