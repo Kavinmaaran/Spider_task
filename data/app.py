@@ -45,7 +45,7 @@ def table():
     app.config['MYSQL_DB'] = 'sql6510938'
     mysql = MySQL(app)
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM from_details")
+    cursor.execute("SELECT * FROM form_details")
     data = cursor.fetchall()
     return render_template('table.html', data=data)
 
