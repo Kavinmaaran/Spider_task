@@ -3,6 +3,12 @@ import os
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net'
+app.config['MYSQL_USER'] = 'sql6510938'
+app.config['MYSQL_PASSWORD'] = 'Ba2uihS6UE'
+app.config['MYSQL_DB'] = 'sql6510938'
+
+mysql = MySQL(app)
 
 @app.route('/', methods = ['POST', 'GET'])
 def home():
@@ -10,11 +16,6 @@ def home():
         return render_template('index.html')
     if request.method == 'POST':
         try:
-            app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net'
-            app.config['MYSQL_USER'] = 'sql6510938'
-            app.config['MYSQL_PASSWORD'] = 'Ba2uihS6UE'
-            app.config['MYSQL_DB'] = 'sql6510938'
-            mysql = MySQL(app)
             name = request.form['name']
             dept = request.form['dept']
             email = request.form['email']
@@ -39,13 +40,8 @@ def callback():
 
 @app.route('/table')
 def table():
-    app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net'
-    app.config['MYSQL_USER'] = 'sql6510938'
-    app.config['MYSQL_PASSWORD'] = 'Ba2uihS6UE'
-    app.config['MYSQL_DB'] = 'sql6510938'
-    mysql = MySQL(app)
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM form_details")
+    cursor.execute('''SELECT * FROM form_details''')
     data = cursor.fetchall()
     return render_template('table.html', data=data)
 
