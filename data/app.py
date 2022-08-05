@@ -38,7 +38,7 @@ def callback():
     return render_template('unsuccess.html')
 
 @app.route('/table')
-def callback():
+def table():
     app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net'
     app.config['MYSQL_USER'] = 'sql6510938'
     app.config['MYSQL_PASSWORD'] = 'Ba2uihS6UE'
@@ -48,7 +48,7 @@ def callback():
     cursor.execute("SELECT * FROM from_details")
     data = cursor.fetchall()
     return render_template('table.html', data=data)
-    
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
