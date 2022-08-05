@@ -10,12 +10,16 @@
     <title>Form</title>
   </head>
   <body>
-<main class="flex-shrink-0">
     <div class="container">
-        <h1 class="mt-5">TRY AGAIN</h1>
-        <p>Unsuccessful entry of details.</p>
-        <a href="/">Try Again</a>
+    {% for item in data %}
+    <tr>
+        <td>{{item[0]}}</td>
+        <td>{{item[1]}}</td>
+        <td>{{item[2]}}</td>
+        <td>{{item[3]}}</td>
+    </tr>
+    {% endfor %}
     </div>
-</main>
+
   </body>
-  </html>
+</html>
