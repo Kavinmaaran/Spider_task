@@ -38,15 +38,36 @@ def search():
 def callback():
     return render_template('unsuccess.html')
 
+@app.route('/viewResponse', methods = ['POST', 'GET'])
+def viewResponse():
+    if request.method == 'GET':
+        return render_template('viewResponse.html')
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+            cursor = mysql.connection.cursor()
+            cursor.execute('''SELECT `name`,`dept`,`rollno` FROM `form_details` WHERE `email` = %s ;''',(email,))
+            data = cursor.fetchall()
+            data = list(data)
+            data.insert(0,["Name","Department","Roll No."])
+            mysql.connection.commit()
+            cursor.close()
+            return render_template('table.html', data=data)
+        except:
+            cursor.close()
+            return render_template('unsuccess.html')
+
 @app.route('/table')
 def table():
     cursor = mysql.connection.cursor()
     cursor.execute('''SELECT * FROM form_details''')
     data = cursor.fetchall()
+    data = list(data)
+    data.insert(0,["Name","Department","Email","Roll No."])
+    cursor.close()
     return render_template('table.html', data=data)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
- 
  
