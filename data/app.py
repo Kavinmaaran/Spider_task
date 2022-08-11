@@ -60,10 +60,10 @@ def viewResponse():
 @app.route('/table')
 def table():
     cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * FROM form_details''')
+    cursor.execute('''SELECT `name`,`dept`,`rollno` FROM form_details''')
     data = cursor.fetchall()
     data = list(data)
-    data.insert(0,["Name","Department","Email","Roll No."])
+    data.insert(0,["Name","Department","Roll No."])
     cursor.close()
     return render_template('table.html', data=data)
 
