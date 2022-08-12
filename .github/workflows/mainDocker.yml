@@ -1,0 +1,22 @@
+dckr_pat_3Q6KxrJ_ZIyIVbYguml13Ncz1Jk
+
+name: Push Container to Docker Hub
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Login to Docker Hub
+      env: 
+        DockerHub_API_KEY: ${{ secrets.DockerHub_API_KEY }}
+      run: docker login -u ${{ secrets.DockerHub_User }}
+    - name: Build and push
+      env:
+        DockerHub_API_KEY: ${{ secrets.DockerHub_API_KEY }}
+      run: docker-compose push
