@@ -4,7 +4,7 @@
 
 #### Hosted on the website [here](https://spider987.herokuapp.com/)
 #### Form details are [here](https://spider987.herokuapp.com/table)
-#### View Responses [here](https://spider987.herokuapp.com/viewResponses)
+#### View Responses [here](https://spider987.herokuapp.com/viewResponse)
 
 
 ## To run in local environment:
