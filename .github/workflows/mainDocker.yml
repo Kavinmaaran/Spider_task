@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DockerHub_User }} --password ${{ secrets.DockerHub_API_KEY }}
-    - name: Build and push
+    - name: Build
       run: docker-compose build
-      run: docker-compose push
+    - name: Push
+        run: docker-compose push
