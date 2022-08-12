@@ -13,6 +13,5 @@ jobs:
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DockerHub_User }} --password ${{ secrets.DockerHub_API_KEY }}
     - name: Build and push
-      env:
-        DockerHub_API_KEY: ${{ secrets.DockerHub_API_KEY }}
+      run: docker-compose build
       run: docker-compose push
