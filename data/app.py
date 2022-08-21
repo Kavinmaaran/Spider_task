@@ -4,10 +4,10 @@ from flask_mysqldb import MySQL
 import hashlib
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'db'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'example'
-app.config['MYSQL_DB'] = 'form'
+app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net'
+app.config['MYSQL_USER'] = 'sql6514149'
+app.config['MYSQL_PASSWORD'] = 'wakvc8SlGq'
+app.config['MYSQL_DB'] = 'sql6514149'
 
 mysql = MySQL(app)
 
