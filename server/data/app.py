@@ -1,6 +1,7 @@
 from flask import Flask,render_template, request
 import os
 from flask_mysqldb import MySQL
+import hashlib
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'db'
@@ -34,9 +35,55 @@ def home():
 def search():
     return render_template('success.html')
 
+@app.route('/signup', methods = ['POST', 'GET'])
+def signup():
+    if request.method == 'GET':
+        return render_template('signup.html')
+    if request.method == 'POST':
+        try:
+            email = request.form['usr_email']
+            passwd = request.form['passwd']
+            name = request.form['username']
+            phone = request.form['phone']
+            password = hashlib.md5(passwd.encode())
+            password=password.hexdigest()
+            cursor = mysql.connection.cursor()
+            cursor.execute('''INSERT INTO `signup` (`username`, `password`, `email`, `phone`)
+                            VALUES (%s, %s, %s, %s);''',(name,password,email,phone))
+            mysql.connection.commit()
+            cursor.close()
+            return render_template('login.html')
+        except:
+            cursor.close()
+            return render_template('unsuccess.html')
 @app.route('/unsuccess', methods = ['POST', 'GET'])
 def callback():
     return render_template('unsuccess.html')
+
+@app.route('/login', methods = ['POST', 'GET'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    if request.method == 'POST':
+        # name = request.form['username']
+        # passwd = request.form['password']
+        try:
+            name = request.form['username']
+            passwd = request.form['password']
+            password = hashlib.md5(passwd.encode())
+            password=password.hexdigest()
+            cursor = mysql.connection.cursor()
+            cursor.execute('''SELECT `password` FROM signup WHERE `username` = %s ;''',(name,))
+            data = cursor.fetchall()
+            mysql.connection.commit()
+            cursor.close()
+            if (data[0][0]==password):    
+                return render_template('index.html', data=name)
+            else:
+                return render_template('login.html')
+        except:
+            cursor.close()
+            return render_template('unsuccess.html')    
 
 @app.route('/viewResponse', methods = ['POST', 'GET'])
 def viewResponse():
